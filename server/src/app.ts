@@ -21,6 +21,10 @@ app.use((_req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
+// importo y uso mis rutas
+import tasksRoutes from "./routes/tasks.routes";
+app.use("/tasks", tasksRoutes);
+
 // catching error
 interface error {
   status: number;
