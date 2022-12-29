@@ -40,10 +40,4 @@ app.use((err: error, _req: Request, res: Response, _next: NextFunction) => {
   res.status(status).send(message);
 });
 
-// probando ruta
-// app.get("/prueba", (_req: Request, res: Response) => {
-//   console.log("Ruta prueba con éxito");
-//   res.send("Success");
-// });
-
 export default app;
