@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { Task } from "../models/task";
+import { postTask, editTask } from "./utils";
 
 const getAllTasks = async (_req: Request, res: Response) => {
   try {
@@ -28,4 +29,48 @@ const getTask = async (req: Request, res: Response) => {
   }
 };
 
-export { getAllTasks, getTask };
+const createTask = async (req: Request, res: Response) => {
+  try {
+    const { title, description, date } = req.body;
+    const newTask = await postTask(title, description, date);
+    if (newTask) {
+      return res.status(201).json({ msg: "Tarea creada", newTask });
+    }
+    res.status(400).send({ msg: "Envia bien los datos" });
+  } catch (error: any) {
+    res.status(500).send({ msg: error.message });
+  }
+};
+
+const updateTask = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { title, description, date } = req.body;
+
+    const changeTask = await editTask(id, title, description, date);
+    if (changeTask) {
+      return res.status(201).json({ msg: "Tarea actualizada", changeTask });
+    }
+    res.status(404).send({ msg: "Tarea no encontrada" });
+  } catch (error: any) {
+    res.status(500).send({ msg: error.message });
+  }
+};
+
+const deleteTask = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const task = await Task.findByPk(id);
+
+    if (!task) {
+      return res.status(404).send({ msg: "Tarea no encontrada" });
+    }
+    // await task.update({ visibility: false }); borrado lógico
+    await task.destroy();
+    res.status(201).send({ msg: "Tarea borrada" });
+  } catch (error: any) {
+    res.status(500).send({ msg: error.message });
+  }
+};
+
+export { getAllTasks, createTask, getTask, updateTask, deleteTask };
