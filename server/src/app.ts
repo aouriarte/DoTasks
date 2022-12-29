@@ -3,6 +3,8 @@ import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import cors from "cors";
 
+import "./models/task";
+
 const app: Application = express(); // le digo que es una aapliación de express
 app.use(cors());
 app.use(express.urlencoded({ extended: true, limit: "50mb" })); //middleware
