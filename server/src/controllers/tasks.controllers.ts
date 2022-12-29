@@ -10,6 +10,7 @@ const getAllTasks = async (_req: Request, res: Response) => {
       return res.status(404).send({ msg: "No hay tareas creadas" });
     }
     res.status(200).json({ msg: "Todas las tareas", allTasks });
+
   } catch (error: any) {
     res.status(500).send({ msg: error.message });
   }
@@ -24,6 +25,7 @@ const getTask = async (req: Request, res: Response) => {
       return res.status(404).send({ msg: "Tarea no encontrada" });
     }
     res.status(200).json({ msg: "Tarea encontrada", findTask });
+
   } catch (error: any) {
     res.status(500).send({ msg: error.message });
   }
@@ -33,10 +35,12 @@ const createTask = async (req: Request, res: Response) => {
   try {
     const { title, description, date } = req.body;
     const newTask = await postTask(title, description, date);
+
     if (newTask) {
       return res.status(201).json({ msg: "Tarea creada", newTask });
     }
     res.status(400).send({ msg: "Envia bien los datos" });
+
   } catch (error: any) {
     res.status(500).send({ msg: error.message });
   }
@@ -52,6 +56,7 @@ const updateTask = async (req: Request, res: Response) => {
       return res.status(201).json({ msg: "Tarea actualizada", changeTask });
     }
     res.status(404).send({ msg: "Tarea no encontrada" });
+
   } catch (error: any) {
     res.status(500).send({ msg: error.message });
   }
@@ -68,6 +73,7 @@ const deleteTask = async (req: Request, res: Response) => {
     // await task.update({ visibility: false }); borrado lógico
     await task.destroy();
     res.status(201).send({ msg: "Tarea borrada" });
+    
   } catch (error: any) {
     res.status(500).send({ msg: error.message });
   }

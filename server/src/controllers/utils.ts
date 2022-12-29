@@ -8,17 +8,13 @@ const postTask = async (title: string, description: string, date: number) => {
       date,
     });
     return task;
+    
   } catch (error) {
     console.log("ERROR EN createTask", error);
   }
 };
 
-const editTask = async (
-  id: any,
-  title: string,
-  description: string,
-  date: string
-) => {
+const editTask = async (id: any, title: string, description: string, date: string) => {
   try {
     const task: any = await Task.findByPk(id);
 
@@ -28,6 +24,7 @@ const editTask = async (
       date,
     });
     return task;
+
   } catch (error) {
     console.log("ERROR EN editTask", error);
   }
