@@ -1,13 +1,10 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
+import { getAllTasks, getTask } from "../controllers/tasks.controllers";
 
 const router = Router();
 
-router.get("/", (_req: Request, res: Response) => {
-    res.send("ruta get task!")
-});
-
-router.post("/", (_req: Request, res: Response) => {
-    res.send("ruta post task!")
-});
+router.get("/", getAllTasks);
+router.get("/:id", getTask);
+// router.post("/", );
 
 export default router;
