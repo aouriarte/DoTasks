@@ -4,7 +4,7 @@ Mi primer proyecto completo con TypeScript
 
 ## 🗒️ Enunciado
 
-La idea es crear una aplicación de notas, poder crearlas, verlas, editarlas y eliminarlas.
+La idea es crear una aplicación para listar tareas, crearlas, editarlas y eliminarlas.
 
 ## 🛠️ Tecnologías que se usaran
 
