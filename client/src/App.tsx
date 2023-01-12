@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import ListTasks from "./components/ListTasks";
 import AddTask from "./components/AddTask";
 
-import "./App.css";
-
 // crear interfaz para mejorar manejo de estados
 interface AppState {
   tasks: Task[]; // <Array<Task>>
@@ -12,7 +10,7 @@ interface AppState {
 const InitialState = [
   {
     title: "1ra nota",
-    description: "No olvidar aprender portugúes",
+    description: "No olvidar aprender portugués",
     date: "Hace 10 minutos",
   },
   {
@@ -30,7 +28,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="mmax-w-full m-0 p-8 text-center">
       <AddTask />
       <ListTasks tasks={tasks} />
     </div>

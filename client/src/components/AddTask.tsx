@@ -1,5 +1,4 @@
 import { useState } from "react";
-import styles from "../styles/AddTask.module.css";
 
 const fecha = new Date();
 
@@ -23,26 +22,28 @@ const AddTask = () => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="Título"
-        name="title"
-        onChange={handleChange}
-        value={inputValues.title}
-      />
-      <textarea
-        className={styles.textarea}
-        name="description"
-        placeholder="Crear una tarea..."
-        onChange={handleChange}
-        value={inputValues.description}
-      ></textarea>
-      <button className={styles.button} type="submit">
-        Guardar
-      </button>
-    </form>
+    <div className="grid m-0 place-items-center">
+      <form className="flex flex-col gap-1 w-80" onSubmit={handleSubmit}>
+        <input
+          className="pl-2"
+          type="text"
+          placeholder="Título"
+          name="title"
+          onChange={handleChange}
+          value={inputValues.title}
+        />
+        <textarea
+          className="pl-2"
+          name="description"
+          placeholder="Crear una tarea..."
+          onChange={handleChange}
+          value={inputValues.description}
+        ></textarea>
+        <button type="submit" className="bg-sky-500 hover:bg-sky-600">
+          Guardar
+        </button>
+      </form>
+    </div>
   );
 };
 
