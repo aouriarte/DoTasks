@@ -1,6 +1,5 @@
-interface Task {
-  // tipos de mi estado inicial
+export interface Task {
   title: string;
-  description: string | number;
+  description: string;
   date: string;
 }

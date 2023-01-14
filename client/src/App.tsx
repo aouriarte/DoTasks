@@ -1,22 +1,23 @@
 import { useEffect, useState } from "react";
 import ListTasks from "./components/ListTasks";
 import AddTask from "./components/AddTask";
+import { Task } from "./types";
 
 // crear interfaz para mejorar manejo de estados
 interface AppState {
-  tasks: Task[]; // <Array<Task>>
+  tasks: Task[]; // <Array<Task>> -> la interface que importé
 }
 
 const InitialState = [
   {
-    title: "1ra nota",
+    title: "1ra tarea",
     description: "No olvidar aprender portugués",
-    date: "Hace 10 minutos",
+    date: "Tue Jan 10 2023",
   },
   {
-    title: "2da nota",
-    description: "Ojalá funcione esto",
-    date: "Hace 5 minutos",
+    title: "2da tarea",
+    description: "Modularizar interfaces",
+    date: "Wed Jan 11 2023",
   },
 ];
 
@@ -29,11 +30,10 @@ function App() {
 
   return (
     <div className="mmax-w-full m-0 p-8 text-center">
-      <AddTask />
+      <AddTask onNewTask={setTasks} />
       <ListTasks tasks={tasks} />
     </div>
   );
 }
 
 export default App;
-// min 50
