@@ -29,7 +29,7 @@ const ListTasks = ({ tasks }: Props) => {
                 <span className="flex text-slate-500 text-xs ml-3 mb-5">
                   {t.date}
                 </span>
-                <h4>{t.title}</h4>
+                <h4 className="text-lg">{t.title}</h4>
                 <p>{t.description}</p>
               </li>
             );

@@ -1,27 +1,41 @@
 import React, { useState } from "react";
 import { Task } from "../types";
 
-const fecha = new Date();
+let fecha = new Date();
 
 // estados para el formulario
 interface FormState {
   inputValues: Task;
 }
 
+// 1 forma:
+// interface FormProps {
+//   onNewTask: React.Dispatch<React.SetStateAction<Task[]>>; // hacer hover sobre los errores
+// }
+
+// 2 forma: para no buscar el tipado de React.disp...
 interface FormProps {
-  onNewTask: React.Dispatch<React.SetStateAction<Task[]>>; // hacer hover sobre los errores
+  onNewTask: (newTask: Task) => void; // hacer hover sobre los errores
 }
 
 const AddTask = ({ onNewTask }: FormProps) => {
   const [inputValues, setInputValues] = useState<FormState["inputValues"]>({
-    date: fecha.toDateString(),
+    date: fecha.toLocaleDateString(), // `Creado el ${fecha.toLocaleDateString()}`
     title: "",
     description: "",
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onNewTask((tasks) => [...tasks, inputValues]);
+    // 1 forma:
+    // onNewTask((tasks) => [...tasks, inputValues]);
+    // 2 forma:
+    onNewTask(inputValues);
+    setInputValues({
+      date: fecha.toLocaleDateString(),
+      title: "",
+      description: "",
+    });
   };
 
   // Consejo: hacer hover para saber el tipo de elemento y agregarlo

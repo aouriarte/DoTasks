@@ -1,10 +1,10 @@
 # DoTasks
 
-Mi primer proyecto completo con TypeScript
+Primer proyecto completo (front & back) con TypeScript
 
 ## 🗒️ Enunciado
 
-La idea es crear una aplicación de notas, poder crearlas, verlas, editarlas y eliminarlas.
+La idea es crear una aplicación de tareas, poder crearlas, verlas, editarlas y eliminarlas.
 
 ## 🛠️ Tecnologías
 
