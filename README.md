@@ -10,12 +10,12 @@ La idea es crear una aplicación de tareas, poder crearlas, verlas, editarlas y 
 
 - **TypeScript**
 - **HTML**
-- **Tailwind**
+- **TailwindCSS**
 - **React.js**
-- **Redux.js**
+- **Redux Toolkit**
 - **Node.js**
-- **Express.js**
-- **Sequelize.ts**
+- **Express**
+- **Sequelize**
 - **PostgreSQL**
 
 ## 💻 Demo
