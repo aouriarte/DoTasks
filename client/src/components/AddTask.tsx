@@ -13,7 +13,7 @@ interface FormProps {
 }
 
 const AddTask = (props: FormProps) => {
-  const params = useParams();
+  const params = useParams(); // https://youtu.be/wOLo-B7mrZM <- Para editar tarea con react-router-dom
 
   let date = new Date();
   const INITIAL_STATE = {
