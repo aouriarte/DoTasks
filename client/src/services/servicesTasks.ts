@@ -10,3 +10,7 @@ export const getTasks = async () => {
 export const createTask = async (newTask: Task) => {
   return await axios.post("http://localhost:3001/tasks", newTask);
 };
+
+export const deleteTask = async (id: string) => {
+  return await axios.delete<Task>(`http://localhost:3001/tasks/${id}`);
+};

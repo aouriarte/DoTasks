@@ -12,7 +12,6 @@ La idea es crear una aplicación de tareas, poder crearlas, verlas, editarlas y 
 - **HTML**
 - **TailwindCSS**
 - **ReactJs**
-- **Redux**
 - **NodeJs**
 - **Express**
 - **Sequelize**

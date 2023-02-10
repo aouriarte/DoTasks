@@ -31,7 +31,7 @@ function App() {
               Crear tarea
             </button>
             {openModal && <AddTask closeModal={setOpenModal} />}
-            <ListTasks tasks={tasks} />
+            <ListTasks tasks={tasks} closeModal={setOpenModal} />
           </div>
         </div>
       </div>

@@ -1,14 +1,22 @@
 import React from "react";
 import { Task } from "../types";
+import * as services from "../services/servicesTasks";
 
 interface Props {
   tasks: Task[];
+  closeModal: any;
 }
 
-const ListTasks = ({ tasks }: Props) => {
+const ListTasks = (props: Props) => {
+  const handleDelete = async (id: string) => {
+    await services.deleteTask(id);
+    alert("Tarea eliminada");
+    window.location.reload();
+  };
+
   return (
     <>
-      {tasks.length < 1 ? (
+      {props.tasks.length < 1 ? (
         <div className="p-10 flex items-center justify-center flex-col space-y-2">
           <img
             className="w-36"
@@ -30,7 +38,7 @@ const ListTasks = ({ tasks }: Props) => {
               </tr>
             </thead>
             <tbody className="text-gray-600 text-sm font-light">
-              {tasks.map((t, i) => {
+              {props.tasks.map((t, i) => {
                 return (
                   <tr
                     className="border-b border-gray-200 hover:bg-gray-100"
@@ -58,7 +66,10 @@ const ListTasks = ({ tasks }: Props) => {
                     </td>
                     <td className="py-3 px-6 text-center">
                       <div className="flex item-center justify-center">
-                        <div className="w-4 mr-2 transform hover:text-blue-700 hover:scale-110 cursor-pointer" onClick={() => console.log(t)}>
+                        <div
+                          className="w-4 mr-2 transform hover:text-blue-700 hover:scale-110 cursor-pointer"
+                          onClick={() => props.closeModal(true)}
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
@@ -73,7 +84,10 @@ const ListTasks = ({ tasks }: Props) => {
                             />
                           </svg>
                         </div>
-                        <div className="w-4 mr-2 transform hover:text-red-700 hover:scale-110 cursor-pointer" onClick={() => console.log(t)}>
+                        <div
+                          className="w-4 mr-2 transform hover:text-red-700 hover:scale-110 cursor-pointer"
+                          onClick={() => t.id && handleDelete(t.id)}
+                        >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
