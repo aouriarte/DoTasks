@@ -10,6 +10,7 @@ const getAllTasks = async (_req: Request, res: Response) => {
       return res.status(404).send({ msg: "No hay tareas creadas" });
     }
     res.status(200).json(allTasks);
+
   } catch (error: any) {
     res.status(500).send({ msg: error.message });
   }
@@ -23,7 +24,8 @@ const getTask = async (req: Request, res: Response) => {
     if (!findTask) {
       return res.status(404).send({ msg: "Tarea no encontrada" });
     }
-    res.status(200).json({ msg: "Tarea encontrada", findTask });
+    res.status(200).json(findTask);
+
   } catch (error: any) {
     res.status(500).send({ msg: error.message });
   }
@@ -35,9 +37,10 @@ const createTask = async (req: Request, res: Response) => {
     const newTask = await postTask(title, description, date);
 
     if (newTask) {
-      return res.status(201).json({ msg: "Tarea creada", newTask });
+      return res.status(201).json(newTask);
     }
     res.status(400).send({ msg: "Envia bien los datos" });
+
   } catch (error: any) {
     res.status(500).send({ msg: error.message });
   }
@@ -50,9 +53,10 @@ const updateTask = async (req: Request, res: Response) => {
 
     const changeTask = await editTask(id, title, description, date);
     if (changeTask) {
-      return res.status(201).json({ msg: "Tarea actualizada", changeTask });
+      return res.status(201).json(changeTask);
     }
     res.status(404).send({ msg: "Tarea no encontrada" });
+
   } catch (error: any) {
     res.status(500).send({ msg: error.message });
   }
@@ -69,6 +73,7 @@ const deleteTask = async (req: Request, res: Response) => {
     // await task.update({ visibility: false }); borrado lógico
     await task.destroy();
     res.status(201).send({ msg: "Tarea borrada" });
+    
   } catch (error: any) {
     res.status(500).send({ msg: error.message });
   }

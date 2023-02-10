@@ -1,6 +1,6 @@
 import { Task } from "../models/task";
 
-const postTask = async (title: string, description: string, date: number) => {
+const postTask = async (title: string, description: string, date: string) => {
   try {
     const task = await Task.create({
       title,
@@ -8,7 +8,7 @@ const postTask = async (title: string, description: string, date: number) => {
       date,
     });
     return task;
-    
+
   } catch (error) {
     console.log("ERROR EN createTask", error);
   }

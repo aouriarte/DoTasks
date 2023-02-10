@@ -1,45 +1,36 @@
 import React, { useState } from "react";
 import { Task } from "../types";
-
-let fecha = new Date();
+import * as services from "../services/servicesTasks";
 
 // estados para el formulario
 interface FormState {
   inputValues: Task;
 }
 
-// 1 forma:
-// interface FormProps {
-//   onNewTask: React.Dispatch<React.SetStateAction<Task[]>>; // hacer hover sobre los errores
-// }
-
-// 2 forma: para no buscar el tipado de React.disp...
 interface FormProps {
-  onNewTask: (newTask: Task) => void; // hacer hover sobre los errores
+  closeModal: any;
 }
 
-const AddTask = ({ onNewTask }: FormProps) => {
-  const [inputValues, setInputValues] = useState<FormState["inputValues"]>({
-    date: fecha.toLocaleDateString(), // `Creado el ${fecha.toLocaleDateString()}`
+const AddTask = (props: FormProps) => {
+  let date = new Date();
+  const INITIAL_STATE = {
     title: "",
     description: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // 1 forma:
-    // onNewTask((tasks) => [...tasks, inputValues]);
-    // 2 forma:
-    onNewTask(inputValues);
-    setInputValues({
-      date: fecha.toLocaleDateString(),
-      title: "",
-      description: "",
-    });
+    date: date.toLocaleDateString(),
   };
 
-  // Consejo: hacer hover para saber el tipo de elemento y agregarlo
-  const handleChange = (
+  const [inputValues, setInputValues] =
+    useState<FormState["inputValues"]>(INITIAL_STATE);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await services.createTask(inputValues);
+    alert("Tarea creada con éxito :)");
+    setInputValues(INITIAL_STATE);
+    window.location.reload();
+  };
+
+  const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setInputValues({
@@ -49,27 +40,47 @@ const AddTask = ({ onNewTask }: FormProps) => {
   };
 
   return (
-    <div className="grid m-0 place-items-center">
-      <form className="flex flex-col gap-1 w-80" onSubmit={handleSubmit}>
-        <input
-          className="pl-2"
-          type="text"
-          placeholder="Título"
-          name="title"
-          onChange={handleChange}
-          value={inputValues.title}
-        />
-        <textarea
-          className="pl-2"
-          name="description"
-          placeholder="Crear una tarea..."
-          onChange={handleChange}
-          value={inputValues.description}
-        ></textarea>
-        <button type="submit" className="bg-sky-500 hover:bg-sky-600">
-          Guardar
-        </button>
-      </form>
+    <div className="flex w-full">
+      <div className="mx-auto z-20 lg:w-1/4 md:w-1/3 sm:w-1/2">
+        <div className="shadow-lg bg-white rounded-lg p-6">
+          <div className="flex justify-end text-black">
+            <button onClick={() => props.closeModal(false)}>X</button>
+          </div>
+          <form className="mt-2" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="title"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
+              value={inputValues.title}
+              onChange={handleInputChange}
+              placeholder="Título"
+            />
+            <textarea
+              name="description"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker"
+              cols={2}
+              value={inputValues.description}
+              onChange={handleInputChange}
+              placeholder="Descripción"
+            ></textarea>
+            <div className="flex justify-center items-center block md:flex">
+              <button
+                type="submit"
+                className="rounded-md py-2 px-4 bg-sky-500 hover:bg-sky-700 text-white m-8"
+              >
+                Crear
+              </button>
+              <button
+                type="submit"
+                onClick={() => props.closeModal(false)}
+                className="rounded-md py-2 px-4 bg-red-500 hover:bg-red-700 text-white m-8"
+              >
+                Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
